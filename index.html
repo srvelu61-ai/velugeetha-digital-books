@@ -289,6 +289,169 @@
     .lang-grid { grid-template-columns: repeat(2, 1fr); }
     .link-grid { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* ── TEXT-TO-SPEECH WIDGET ── */
+  .tts-widget {
+    margin-top: 18px;
+    background: linear-gradient(135deg, #e8f4fd 0%, #eef7f0 100%);
+    border: 2px solid #b3d9f5;
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .tts-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .tts-header span {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1a4a7a;
+  }
+  .tts-header small {
+    font-size: 0.75rem;
+    color: #5c8ab0;
+    margin-left: auto;
+  }
+  .tts-lang-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .tts-lang-btn {
+    background: #fff;
+    border: 2px solid #b3d9f5;
+    border-radius: 20px;
+    padding: 3px 13px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1a4a7a;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: 'Noto Serif', serif;
+  }
+  .tts-lang-btn:hover { background: #dbeafe; }
+  .tts-lang-btn.tts-active {
+    background: #2563eb;
+    color: #fff;
+    border-color: #1d4ed8;
+  }
+  .tts-text-area {
+    width: 100%;
+    min-height: 80px;
+    border: 1.5px solid #b3d9f5;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    background: #fff;
+    resize: vertical;
+    outline: none;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .tts-text-area:focus { border-color: #2563eb; }
+  .tts-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tts-speed-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #5c8ab0;
+    flex: 1;
+    min-width: 120px;
+  }
+  .tts-speed-wrap input[type=range] {
+    flex: 1;
+    accent-color: #2563eb;
+    height: 4px;
+  }
+  .tts-speed-val {
+    background: #2563eb;
+    color: #fff;
+    border-radius: 99px;
+    padding: 1px 8px;
+    font-size: 0.72rem;
+    min-width: 38px;
+    text-align: center;
+  }
+  .tts-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s;
+  }
+  .tts-btn-play  { background: #16a34a; color: #fff; box-shadow: 0 3px 10px rgba(22,163,74,0.3); }
+  .tts-btn-play:hover  { background: #15803d; transform: translateY(-1px); }
+  .tts-btn-stop  { background: #fee2e2; color: #dc2626; border: 1.5px solid #fca5a5; }
+  .tts-btn-stop:hover  { background: #fca5a5; }
+  .tts-btn-pause { background: #fefce8; color: #92400e; border: 1.5px solid #fde68a; }
+  .tts-btn-pause:hover { background: #fde68a; }
+  .tts-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #64748b;
+    transition: all 0.25s;
+    margin-bottom: 8px;
+  }
+  .tts-status.tts-speaking { background: #dcfce7; color: #16a34a; }
+  .tts-status.tts-paused   { background: #fefce8; color: #92400e; }
+  .tts-status.tts-error    { background: #fee2e2; color: #dc2626; }
+  .tts-wave {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    height: 16px;
+  }
+  .tts-wave b {
+    display: block;
+    width: 3px;
+    background: currentColor;
+    border-radius: 2px;
+    animation: ttswave 0.7s ease-in-out infinite;
+  }
+  .tts-wave b:nth-child(2) { animation-delay: 0.15s; }
+  .tts-wave b:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes ttswave { 0%,100%{height:4px} 50%{height:14px} }
+  .tts-highlight-row {
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text);
+    min-height: 36px;
+  }
+  .tts-highlight-row mark {
+    background: #fbbf24;
+    color: #1c1917;
+    border-radius: 3px;
+    padding: 0 2px;
+  }
 </style>
 </head>
 <body id="body">
@@ -343,6 +506,34 @@
     </div>
     <div class="book-price">₹250 per book</div>
     <div class="book-note">⚠️ Kannada &amp; Malayalam editions currently unavailable</div>
+
+    <!-- 🔊 TEXT-TO-SPEECH WIDGET -->
+    <div class="tts-widget">
+      <div class="tts-header">
+        <span>🔊 Read Aloud – Special Education</span>
+        <small>Powered by Web Speech API</small>
+      </div>
+      <div class="tts-lang-row" id="ttsLangRow">
+        <button class="tts-lang-btn tts-active" data-lang="en-IN" onclick="ttsSetLang(this)">English</button>
+        <button class="tts-lang-btn" data-lang="ta-IN" onclick="ttsSetLang(this)">Tamil தமிழ்</button>
+        <button class="tts-lang-btn" data-lang="te-IN" onclick="ttsSetLang(this)">Telugu తెలుగు</button>
+        <button class="tts-lang-btn" data-lang="hi-IN" onclick="ttsSetLang(this)">Hindi हिंदी</button>
+      </div>
+      <textarea class="tts-text-area" id="ttsInput">A complete guide for educators and parents supporting students with special needs. Covers IEP planning, classroom strategies, and inclusive learning techniques. This book is available in Tamil, English, Telugu, and Hindi.</textarea>
+      <div class="tts-controls-row">
+        <div class="tts-speed-wrap">
+          🐢 Speed
+          <input type="range" id="ttsRate" min="0.3" max="2.0" step="0.1" value="0.85"
+            oninput="document.getElementById('ttsRateVal').textContent=parseFloat(this.value).toFixed(1)+'×'"/>
+          <span class="tts-speed-val" id="ttsRateVal">0.9×</span>
+        </div>
+        <button class="tts-btn tts-btn-play"  onclick="ttsPlay()">▶ Play</button>
+        <button class="tts-btn tts-btn-pause" onclick="ttsPause()">⏸ Pause</button>
+        <button class="tts-btn tts-btn-stop"  onclick="ttsStop()">⏹ Stop</button>
+      </div>
+      <div class="tts-status" id="ttsStatus">🎧 Ready — press Play to listen</div>
+      <div class="tts-highlight-row" id="ttsHighlight">Word-by-word highlight will appear here while reading…</div>
+    </div>
     <div class="lang-grid">
       <div class="lang-item">
         <span class="lang-label">Tamil</span>
@@ -657,16 +848,88 @@
 </footer>
 
 <script>
-  // Text size
+  // ── ACCESSIBILITY ──
   let size = 16;
   function changeSize(d) {
     if (d === 0) size = 16;
     else size = Math.min(22, Math.max(12, size + d * 2));
     document.body.style.fontSize = size + 'px';
   }
-  // High contrast
-  function toggleHC() {
-    document.body.classList.toggle('hc');
+  function toggleHC() { document.body.classList.toggle('hc'); }
+
+  // ── TEXT-TO-SPEECH ──
+  let ttsVoices = [];
+  let ttsLang = 'en-IN';
+  let ttsUtterance = null;
+  let ttsPaused = false;
+
+  window.speechSynthesis.onvoiceschanged = () => { ttsVoices = window.speechSynthesis.getVoices(); };
+  ttsVoices = window.speechSynthesis.getVoices();
+
+  function ttsSetLang(btn) {
+    document.querySelectorAll('.tts-lang-btn').forEach(b => b.classList.remove('tts-active'));
+    btn.classList.add('tts-active');
+    ttsLang = btn.dataset.lang;
+    ttsStop();
+  }
+
+  function ttsPlay() {
+    const text = document.getElementById('ttsInput').value.trim();
+    if (!text) { ttsSetStatus('error', '⚠️ Please enter some text first'); return; }
+    ttsStop();
+    ttsUtterance = new SpeechSynthesisUtterance(text);
+    ttsUtterance.lang  = ttsLang;
+    ttsUtterance.rate  = parseFloat(document.getElementById('ttsRate').value);
+    ttsUtterance.pitch = 1.0;
+    const voices = window.speechSynthesis.getVoices();
+    const match = voices.filter(v => v.lang === ttsLang || v.lang.startsWith(ttsLang.split('-')[0]));
+    if (match.length) ttsUtterance.voice = match[0];
+    ttsUtterance.onstart   = () => { ttsPaused = false; ttsSetStatus('tts-speaking', '🔊 Speaking…'); };
+    ttsUtterance.onend     = () => { ttsPaused = false; ttsSetStatus('', '✅ Done!'); ttsHighlightClear(); };
+    ttsUtterance.onerror   = (e) => ttsSetStatus('tts-error', '⚠️ ' + (e.error || 'Error'));
+    ttsUtterance.onpause   = () => ttsSetStatus('tts-paused', '⏸ Paused');
+    ttsUtterance.onresume  = () => ttsSetStatus('tts-speaking', '🔊 Speaking…');
+    ttsUtterance.onboundary = (e) => { if (e.name === 'word') ttsHighlightWord(e.charIndex, text); };
+    window.speechSynthesis.speak(ttsUtterance);
+  }
+
+  function ttsPause() {
+    if (!window.speechSynthesis.speaking) return;
+    if (ttsPaused) { window.speechSynthesis.resume(); ttsPaused = false; }
+    else           { window.speechSynthesis.pause();  ttsPaused = true;  }
+  }
+
+  function ttsStop() {
+    window.speechSynthesis.cancel();
+    ttsPaused = false;
+    ttsSetStatus('', '🎧 Ready — press Play to listen');
+    ttsHighlightClear();
+  }
+
+  function ttsSetStatus(cls, msg) {
+    const el = document.getElementById('ttsStatus');
+    el.className = 'tts-status ' + cls;
+    const wave = cls === 'tts-speaking'
+      ? '<span class="tts-wave"><b></b><b></b><b></b></span> '
+      : '';
+    el.innerHTML = wave + msg;
+  }
+
+  function ttsHighlightWord(charIndex, fullText) {
+    const wordMatch = fullText.substring(charIndex).match(/^\S+/);
+    if (!wordMatch) return;
+    const before = esc(fullText.substring(0, charIndex));
+    const word   = esc(wordMatch[0]);
+    const after  = esc(fullText.substring(charIndex + wordMatch[0].length));
+    document.getElementById('ttsHighlight').innerHTML = before + '<mark>' + word + '</mark>' + after;
+  }
+
+  function ttsHighlightClear() {
+    document.getElementById('ttsHighlight').textContent = document.getElementById('ttsInput').value || '';
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 </script>
 
