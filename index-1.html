@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Velugeetha Publishers — Accessible books in Tamil and English for visually impaired students, parents, and educators."/>
+<title>Velugeetha Books | వెలుగీత పుస్తకాలు</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:wght@300;400;600&family=Noto+Sans+Telugu&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#1a1208;--paper:#fdf6e8;--cream:#f5e9cc;--gold:#c8860a;--gold2:#f0b429;
+  --rust:#b84a1a;--teal:#0e6b6b;--muted:#7a6a50;--card:#fffdf5;
+  --shadow:0 4px 24px rgba(26,18,8,.10);--r:10px;
+  --ff-head:'Playfair Display',Georgia,serif;
+  --ff-body:'Source Serif 4',Georgia,serif;
+  --ff-tel:'Noto Sans Telugu',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:18px;scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--ff-body);line-height:1.7;}
+*:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+.skip-link{position:fixed;top:-100%;left:1rem;z-index:9999;background:var(--gold);color:#fff;padding:.6rem 1.4rem;border-radius:var(--r);font-weight:700;text-decoration:none;transition:top .2s;}
+.skip-link:focus{top:1rem;}
+
+#a11y-bar{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:flex-end;gap:.5rem;padding:.5rem 1.25rem;flex-wrap:wrap;}
+#a11y-bar span{font-size:.8rem;color:#ccc;margin-right:.25rem;}
+.abt{background:transparent;border:1px solid #666;color:#eee;border-radius:5px;padding:.25rem .7rem;cursor:pointer;font-family:var(--ff-body);font-size:.85rem;transition:background .2s,color .2s;}
+.abt:hover,.abt:focus-visible{background:var(--gold2);color:var(--ink);border-color:var(--gold2);}
+body.hc{--paper:#000;--cream:#111;--ink:#fff;--card:#111;--muted:#aaa;--gold:#ffff00;--gold2:#ffff00;--teal:#00ffcc;--rust:#ff6633;}
+
+header{background:var(--ink);color:var(--paper);padding:3.5rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(200,134,10,.04) 0,rgba(200,134,10,.04) 1px,transparent 1px,transparent 18px);pointer-events:none;}
+.logo-ring{display:inline-flex;align-items:center;justify-content:center;width:5rem;height:5rem;border-radius:50%;border:2px solid var(--gold);font-size:2.2rem;margin-bottom:1rem;animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,134,10,.4);}50%{box-shadow:0 0 0 12px rgba(200,134,10,0);}}
+h1{font-family:var(--ff-head);font-size:clamp(1.8rem,5vw,3rem);color:var(--gold2);line-height:1.2;}
+h1 small{display:block;font-family:var(--ff-tel);font-size:.55em;color:#bbb;font-weight:400;margin-top:.3rem;}
+.tagline{color:#bbb;font-style:italic;margin-top:.6rem;font-size:1rem;}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:1.2rem;}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(200,134,10,.3);border-radius:999px;padding:.2rem .9rem;font-size:.8rem;color:#ccc;}
+
+main{max-width:960px;margin:0 auto;padding:2.5rem 1.25rem 4rem;}
+.sec-title{font-family:var(--ff-head);font-size:clamp(1.3rem,3vw,1.7rem);color:var(--rust);border-left:4px solid var(--gold);padding-left:.75rem;margin-bottom:1.5rem;}
+
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem;margin-bottom:3rem;}
+.book-card{background:var(--card);border:1px solid var(--cream);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;}
+.book-card:hover{transform:translateY(-5px);box-shadow:0 10px 36px rgba(26,18,8,.15);}
+.book-spine{height:8px;background:linear-gradient(90deg,var(--c1,#c8860a),var(--c2,#f0b429));}
+.book-body{padding:1.25rem 1.1rem;flex:1;display:flex;flex-direction:column;gap:.5rem;}
+.book-icon{font-size:2rem;}
+.book-title{font-family:var(--ff-head);font-size:1.05rem;color:var(--ink);line-height:1.3;}
+.book-lang{font-size:.78rem;color:var(--muted);font-style:italic;}
+.book-desc{font-size:.88rem;color:var(--muted);flex:1;line-height:1.5;}
+.book-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem;}
+.tag{font-size:.72rem;background:var(--cream);color:var(--muted);border-radius:4px;padding:.15rem .5rem;}
+.book-actions{display:flex;gap:.5rem;padding:0 1.1rem 1.1rem;flex-wrap:wrap;}
+.btn{flex:1;min-width:80px;padding:.45rem .6rem;border-radius:6px;border:none;cursor:pointer;font-family:var(--ff-body);font-size:.82rem;font-weight:600;transition:background .2s,transform .1s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:.3rem;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--teal);color:#fff;}
+.btn-primary:hover{background:#0a5555;}
+.btn-secondary{background:var(--cream);color:var(--ink);border:1px solid #d4c4a0;}
+.btn-secondary:hover{background:#ecddb0;}
+.btn-audio{background:var(--rust);color:#fff;}
+.btn-audio:hover{background:#8a3010;}
+
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:3rem;}
+.feat{background:var(--card);border:1px solid var(--cream);border-radius:var(--r);padding:1rem;text-align:center;box-shadow:var(--shadow);}
+.feat-icon{font-size:1.7rem;display:block;margin-bottom:.4rem;}
+.feat h3{font-size:.9rem;color:var(--teal);font-family:var(--ff-head);margin-bottom:.2rem;}
+.feat p{font-size:.8rem;color:var(--muted);}
+
+.parents{background:linear-gradient(135deg,#fff8e8,#fdf0d0);border:1px solid #e8d4a0;border-radius:var(--r);padding:1.5rem 1.25rem;margin-bottom:3rem;}
+.parents h2{font-family:var(--ff-head);color:var(--rust);margin-bottom:.75rem;font-size:1.2rem;}
+.parents ul{padding-left:1.2rem;}
+.parents li{margin-bottom:.5rem;font-size:.93rem;color:var(--muted);}
+.parents li strong{color:var(--ink);}
+
+footer{background:var(--ink);color:#bbb;text-align:center;padding:2rem 1rem;font-size:.85rem;}
+footer a{color:var(--gold2);}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div id="a11y-bar" role="toolbar" aria-label="Accessibility controls">
+  <span>Text size:</span>
+  <button class="abt" onclick="fs(-1)" aria-label="Decrease text size">A−</button>
+  <button class="abt" onclick="fs(0)"  aria-label="Reset text size">A</button>
+  <button class="abt" onclick="fs(1)"  aria-label="Increase text size">A+</button>
+  <button class="abt" id="hcBtn" onclick="hc()" aria-pressed="false">⬛ High Contrast</button>
+</div>
+
+<header role="banner">
+  <div class="logo-ring" aria-hidden="true">📚</div>
+  <h1>Velugeetha Books<small>వెలుగీత పుస్తకాలు</small></h1>
+  <p class="tagline">Accessible Knowledge for Every Student</p>
+  <div class="badges">
+    <span class="badge">Tamil தமிழ்</span>
+    <span class="badge">Telugu తెలుగు</span>
+    <span class="badge">English</span>
+    <span class="badge">♿ Accessible Edition 2026</span>
+  </div>
+</header>
+
+<main id="main">
+
+  <section aria-labelledby="books-title" style="margin-bottom:2rem;">
+    <h2 class="sec-title" id="books-title">📖 Our Books · మా పుస్తకాలు</h2>
+    <div class="books-grid" role="list">
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#1a6b4a;--c2:#3dd68c;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">🎓</span>
+          <h3 class="book-title">Special Education Guide</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">A complete guide for educators and parents supporting students with special needs. Covers IEP planning, classroom strategies, and inclusive learning.</p>
+          <div class="book-tags"><span class="tag">Education</span><span class="tag">Inclusive</span><span class="tag">Parents</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#0e6b6b;--c2:#2ab8b8;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">🏛️</span>
+          <h3 class="book-title">Inclusive Higher Education</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">Navigating college and university for students with disabilities. Covers rights, support services, assistive technology, and campus accessibility.</p>
+          <div class="book-tags"><span class="tag">Higher Ed</span><span class="tag">Rights</span><span class="tag">Assistive Tech</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#c8860a;--c2:#f0b429;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">👁️</span>
+          <h3 class="book-title">Visually Impaired Students</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">Resources and strategies specifically for visually impaired learners. Braille basics, screen readers, audio learning, and self-advocacy skills.</p>
+          <div class="book-tags"><span class="tag">Braille</span><span class="tag">Screen Reader</span><span class="tag">Audio</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#2d6a1a;--c2:#6abf40;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">🌿</span>
+          <h3 class="book-title">Nature's Pharmacy</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">Traditional Siddha and Ayurvedic plant medicine. Healing herbs of South India with Tamil names, uses, and preparation methods.</p>
+          <div class="book-tags"><span class="tag">Ayurveda</span><span class="tag">Siddha</span><span class="tag">Plants</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#6b1a1a;--c2:#c84040;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">⚖️</span>
+          <h3 class="book-title">Basic Law Textbook</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">Fundamental legal rights for citizens, with special focus on disability rights under Indian law. Know your rights in simple, accessible language.</p>
+          <div class="book-tags"><span class="tag">Legal Rights</span><span class="tag">Disability Law</span><span class="tag">India</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+      <article class="book-card" role="listitem">
+        <div class="book-spine" style="--c1:#3a1a6b;--c2:#8040c8;"></div>
+        <div class="book-body">
+          <span class="book-icon" aria-hidden="true">🧠</span>
+          <h3 class="book-title">Mind Traps</h3>
+          <p class="book-lang">Tamil + English · தமிழ் + English</p>
+          <p class="book-desc">Understanding cognitive biases, mental health, and psychological resilience. A guide for students and parents on navigating learning challenges.</p>
+          <div class="book-tags"><span class="tag">Psychology</span><span class="tag">Mental Health</span><span class="tag">Students</span></div>
+        </div>
+        <div class="book-actions">
+          <a href="#" class="btn btn-primary">📥 Download</a>
+          <a href="#" class="btn btn-audio">🔊 Listen</a>
+          <a href="#" class="btn btn-secondary">👁 Preview</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="feat-title">
+    <h2 class="sec-title" id="feat-title">♿ Accessibility Features</h2>
+    <div class="features">
+      <div class="feat"><span class="feat-icon" aria-hidden="true">🔊</span><h3>Audio Books</h3><p>Every book in MP3 audio — Tamil &amp; English</p></div>
+      <div class="feat"><span class="feat-icon" aria-hidden="true">🔠</span><h3>Large Text</h3><p>Use A+ button above to increase text size</p></div>
+      <div class="feat"><span class="feat-icon" aria-hidden="true">⬛</span><h3>High Contrast</h3><p>Black &amp; white mode for low vision users</p></div>
+      <div class="feat"><span class="feat-icon" aria-hidden="true">⌨️</span><h3>Screen Reader</h3><p>Works with NVDA, JAWS &amp; TalkBack</p></div>
+      <div class="feat"><span class="feat-icon" aria-hidden="true">📱</span><h3>Mobile Ready</h3><p>Works on any Android or iPhone</p></div>
+      <div class="feat"><span class="feat-icon" aria-hidden="true">📥</span><h3>Free Download</h3><p>All books free — PDF, EPUB &amp; audio</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="parents-title">
+    <div class="parents">
+      <h2 id="parents-title">👨‍👩‍👧 For Parents — తల్లిదండ్రులకు</h2>
+      <ul>
+        <li><strong>Free for all students</strong> — every book is completely free to download and share.</li>
+        <li><strong>Audio versions</strong> — press the 🔊 Listen button on any book for the audio edition.</li>
+        <li><strong>Works on your phone</strong> — share <em>srvelu61-ai.github.io/velugeetha-books</em> with your child's teacher.</li>
+        <li><strong>Tamil + English</strong> — all books in both languages so parents can read along.</li>
+        <li><strong>Disability rights</strong> — the Basic Law Textbook explains your child's legal rights in school and college.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Velugeetha Publishers © 2026 · Tamil + English Accessible Edition</p>
+  <p style="margin-top:.4rem;">Open source on <a href="https://github.com/srvelu61-ai/velugeetha-books">GitHub</a> · Built for visually impaired students</p>
+</footer>
+
+<script>
+let d=0;
+function fs(v){d=v===0?0:Math.max(-3,Math.min(5,d+v));document.documentElement.style.fontSize=(18+d*2)+'px';try{localStorage.setItem('vg-fs',d);}catch(e){}}
+function hc(){const b=document.body.classList.toggle('hc');const btn=document.getElementById('hcBtn');btn.setAttribute('aria-pressed',b);btn.textContent=b?'☀️ Normal':'⬛ High Contrast';try{localStorage.setItem('vg-hc',b?1:0);}catch(e){}}
+try{const s=localStorage.getItem('vg-fs');const c=localStorage.getItem('vg-hc');if(s){d=parseInt(s);document.documentElement.style.fontSize=(18+d*2)+'px';}if(c==='1'){document.body.classList.add('hc');document.getElementById('hcBtn').textContent='☀️ Normal';document.getElementById('hcBtn').setAttribute('aria-pressed','true');}}catch(e){}
+</script>
+</body>
+</html>
