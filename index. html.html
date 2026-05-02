@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Velugeetha Books | వెలుగీత పుస్తకాలు</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tiro+Tamil:ital@0;1&family=Noto+Sans+Telugu:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #c8860a;
+  --deep-gold: #a06800;
+  --saffron: #e8940a;
+  --cream: #fdf6e3;
+  --dark: #1a1008;
+  --brown: #3d1f00;
+  --warm-gray: #7a6a55;
+  --accent-red: #b5280a;
+  --light-gold: #f5dfa0;
+  --bg: #fef9f0;
+  --card-bg: #fffdf5;
+  --border: #e8d5a0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--dark);
+  font-family:'Lato',sans-serif;
+  line-height:1.7;
+}
+
+/* HERO */
+.hero{
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1500 40%, #6b2a00 100%);
+  color:#fff;
+  padding:70px 20px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,134,10,0.3) 0%, transparent 70%);
+}
+.hero-lamp{font-size:3.5rem;margin-bottom:12px;display:block;animation:glow 3s ease-in-out infinite alternate;}
+@keyframes glow{from{filter:drop-shadow(0 0 8px #ffaa00);} to{filter:drop-shadow(0 0 24px #ffcc44);}}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  font-weight:900;
+  letter-spacing:-0.5px;
+  color:#fde68a;
+  position:relative;
+}
+.hero-sub{
+  font-family:'Tiro Tamil',serif;
+  font-size:1.3rem;
+  color:#fcd97a;
+  margin-top:6px;
+  position:relative;
+}
+.lang-tags{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-top:24px;position:relative;
+}
+.lang-tag{
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(200,134,10,0.5);
+  color:#fde68a;
+  padding:5px 16px;
+  border-radius:20px;
+  font-size:0.85rem;
+  letter-spacing:0.5px;
+}
+.badge{
+  display:inline-block;
+  background:#c8860a;
+  color:#fff;
+  padding:4px 14px;
+  border-radius:20px;
+  font-size:0.8rem;
+  font-weight:700;
+  letter-spacing:1px;
+  margin-top:18px;
+  position:relative;
+}
+
+/* NAV */
+nav{
+  background:var(--brown);
+  padding:0 20px;
+  display:flex;
+  justify-content:center;
+  gap:4px;
+  flex-wrap:wrap;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,0.3);
+}
+nav a{
+  color:#fde68a;
+  text-decoration:none;
+  padding:14px 16px;
+  font-size:0.88rem;
+  font-weight:700;
+  letter-spacing:0.5px;
+  border-bottom:3px solid transparent;
+  transition:border-color 0.2s,color 0.2s;
+}
+nav a:hover{border-bottom-color:var(--gold);color:#fff;}
+
+/* SECTIONS */
+section{padding:60px 20px;}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  color:var(--brown);
+  text-align:center;
+  margin-bottom:8px;
+}
+.section-sub{
+  text-align:center;
+  color:var(--warm-gray);
+  margin-bottom:40px;
+  font-size:1rem;
+}
+.divider{
+  width:80px;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--saffron));
+  margin:12px auto 40px;
+  border-radius:2px;
+}
+
+/* BOOK CARDS */
+.books-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:28px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.book-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(100,60,0,0.08);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(100,60,0,0.16);}
+.book-header{
+  padding:22px 22px 16px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,#fffbee,#fef3cc);
+}
+.book-icon{font-size:2.2rem;margin-bottom:8px;display:block;}
+.book-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-weight:700;
+  color:var(--brown);
+  margin-bottom:6px;
+}
+.book-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.book-tag{
+  background:var(--light-gold);
+  color:var(--deep-gold);
+  padding:2px 10px;
+  border-radius:12px;
+  font-size:0.73rem;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+.book-body{padding:20px 22px;}
+.book-preview-text{
+  font-size:0.95rem;
+  color:#4a3520;
+  line-height:1.75;
+  margin-bottom:16px;
+}
+.tts-bar{
+  background:#fef6e4;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:16px;
+}
+.tts-label{font-size:0.75rem;color:var(--warm-gray);margin-bottom:8px;font-weight:700;letter-spacing:0.5px;}
+.tts-langs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tts-btn{
+  background:#fff;
+  border:1.5px solid var(--border);
+  color:var(--brown);
+  padding:4px 12px;
+  border-radius:8px;
+  font-size:0.78rem;
+  cursor:pointer;
+  font-weight:600;
+  transition:all 0.2s;
+}
+.tts-btn:hover,.tts-btn.active{background:var(--gold);border-color:var(--gold);color:#fff;}
+.tts-controls{display:flex;gap:8px;align-items:center;}
+.play-btn{
+  background:linear-gradient(135deg,var(--gold),var(--saffron));
+  color:#fff;
+  border:none;
+  padding:8px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:0.85rem;
+  font-weight:700;
+  display:flex;align-items:center;gap:6px;
+  transition:opacity 0.2s,transform 0.1s;
+}
+.play-btn:hover{opacity:0.9;transform:scale(1.02);}
+.stop-btn{
+  background:#fff;border:1.5px solid var(--border);
+  color:var(--warm-gray);padding:8px 14px;
+  border-radius:8px;cursor:pointer;font-size:0.85rem;
+  transition:all 0.2s;
+}
+.stop-btn:hover{border-color:var(--accent-red);color:var(--accent-red);}
+.tts-status{font-size:0.75rem;color:var(--warm-gray);margin-left:4px;}
+
+.price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:10px;
+  padding-top:14px;
+  border-top:1px solid var(--border);
+}
+.price{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  font-weight:700;
+  color:var(--deep-gold);
+}
+.buy-btn{
+  background:linear-gradient(135deg,var(--accent-red),#8b1a00);
+  color:#fff;
+  border:none;
+  padding:9px 22px;
+  border-radius:9px;
+  font-weight:700;
+  font-size:0.88rem;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  transition:opacity 0.2s,transform 0.1s;
+  letter-spacing:0.5px;
+}
+.buy-btn:hover{opacity:0.88;transform:scale(1.03);}
+
+/* PERIYAR SECTION */
+#periyar{background:linear-gradient(180deg,#1a0a00 0%,#2d1200 100%);color:#fff;}
+#periyar .section-title{color:#fde68a;}
+#periyar .section-sub{color:#d4a04a;}
+#periyar .divider{background:linear-gradient(90deg,#fde68a,#c8860a);}
+
+.periyar-intro{
+  max-width:750px;margin:0 auto 40px;
+  text-align:center;
+  font-size:1.05rem;
+  color:#e8d5a0;
+  line-height:1.8;
+}
+.periyar-quote{
+  background:rgba(200,134,10,0.15);
+  border-left:4px solid var(--gold);
+  padding:16px 20px;
+  border-radius:0 10px 10px 0;
+  font-style:italic;
+  color:#fde68a;
+  margin:20px 0;
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+}
+
+.lang-tabs{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-bottom:30px;
+}
+.lang-tab{
+  background:rgba(255,255,255,0.08);
+  border:1.5px solid rgba(200,134,10,0.3);
+  color:#fde68a;
+  padding:8px 20px;
+  border-radius:22px;
+  cursor:pointer;
+  font-size:0.88rem;
+  font-weight:700;
+  transition:all 0.2s;
+}
+.lang-tab:hover,.lang-tab.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#1a0800;
+}
+
+.periyar-content{display:none;}
+.periyar-content.active{display:block;}
+.periyar-card{
+  max-width:800px;
+  margin:0 auto;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(200,134,10,0.3);
+  border-radius:16px;
+  padding:30px;
+}
+.periyar-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  color:#fde68a;
+  margin-bottom:6px;
+}
+.periyar-card .sub{color:#c8a04a;font-size:0.9rem;margin-bottom:20px;}
+.periyar-card p{
+  color:#e8d5b0;
+  margin-bottom:14px;
+  line-height:1.85;
+  font-size:0.97rem;
+}
+.periyar-tts{
+  margin-top:20px;
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+}
+.periyar-play{
+  background:linear-gradient(135deg,var(--gold),var(--saffron));
+  color:#1a0800;
+  border:none;padding:9px 22px;
+  border-radius:9px;cursor:pointer;
+  font-weight:700;font-size:0.88rem;
+  display:flex;align-items:center;gap:6px;
+}
+.periyar-stop{
+  background:transparent;
+  border:1.5px solid rgba(200,134,10,0.5);
+  color:#fde68a;padding:9px 16px;
+  border-radius:9px;cursor:pointer;
+  font-size:0.88rem;
+}
+
+/* BUNDLE */
+#bundle{background:linear-gradient(135deg,#3d1500,#6b2a00);}
+#bundle .section-title{color:#fde68a;}
+#bundle .divider{background:linear-gradient(90deg,#fde68a,#c8860a);}
+.bundle-card{
+  max-width:600px;margin:0 auto;
+  background:rgba(255,255,255,0.08);
+  border:2px solid var(--gold);
+  border-radius:20px;
+  padding:36px;
+  text-align:center;
+  color:#fff;
+}
+.bundle-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;color:#fde68a;margin-bottom:8px;
+}
+.bundle-price{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;color:#fde68a;font-weight:900;margin:16px 0 8px;
+}
+.bundle-sub{color:#d4a04a;margin-bottom:24px;}
+.bundle-buy{
+  background:linear-gradient(135deg,#c8860a,#e8940a);
+  color:#1a0800;border:none;
+  padding:14px 40px;border-radius:12px;
+  font-size:1rem;font-weight:900;
+  cursor:pointer;text-decoration:none;
+  display:inline-block;letter-spacing:1px;
+  transition:transform 0.2s,opacity 0.2s;
+}
+.bundle-buy:hover{transform:scale(1.04);opacity:0.92;}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  color:#9a8060;
+  text-align:center;
+  padding:30px 20px;
+  font-size:0.88rem;
+}
+footer span{color:var(--gold);}
+
+/* ACCESSIBILITY */
+.access-bar{
+  background:var(--brown);
+  color:#fde68a;
+  padding:8px 20px;
+  display:flex;justify-content:flex-end;gap:10px;align-items:center;
+  font-size:0.8rem;
+}
+.access-bar button{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(200,134,10,0.4);
+  color:#fde68a;padding:3px 10px;
+  border-radius:6px;cursor:pointer;font-size:0.8rem;
+}
+.access-bar button:hover{background:var(--gold);color:#fff;}
+
+/* READING INDICATOR */
+.reading-dot{
+  display:inline-block;
+  width:8px;height:8px;
+  background:#22c55e;
+  border-radius:50%;
+  animation:pulse 1.2s ease-in-out infinite;
+  margin-right:4px;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .books-grid{grid-template-columns:1fr;}
+  .price-row{flex-direction:column;gap:12px;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- ACCESSIBILITY BAR -->
+<div class="access-bar">
+  <span>♿ Accessibility:</span>
+  <button onclick="changeFontSize(1)">A+</button>
+  <button onclick="changeFontSize(-1)">A−</button>
+  <button onclick="toggleContrast()">⬛ High Contrast</button>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-lamp">🪔</span>
+  <h1>Velugeetha Books</h1>
+  <div class="hero-sub">వెలుగీత పుస్తకాలు · வெளுகீத புத்தகங்கள்</div>
+  <div class="lang-tags">
+    <span class="lang-tag">தமிழ் Tamil</span>
+    <span class="lang-tag">తెలుగు Telugu</span>
+    <span class="lang-tag">മലയാളം Malayalam</span>
+    <span class="lang-tag">ಕನ್ನಡ Kannada</span>
+    <span class="lang-tag">हिंदी Hindi</span>
+    <span class="lang-tag">English</span>
+  </div>
+  <div class="badge">🔊 LISTEN · READ · LEARN · BUY</div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#books">📚 Our Books</a>
+  <a href="#periyar">📜 Periyar Research</a>
+  <a href="#bundle">🎁 Bundle Offer</a>
+</nav>
+
+<!-- BOOKS SECTION -->
+<section id="books">
+  <h2 class="section-title">📖 Our Books · మా పుస్తకాలు</h2>
+  <p class="section-sub">Click 🔊 Play to listen to any preview in your language</p>
+  <div class="divider"></div>
+
+  <div class="books-grid">
+
+    <!-- BOOK 1 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">🎓</span>
+        <div class="book-title">Special Education Guide</div>
+        <div class="book-tags">
+          <span class="book-tag">Education</span>
+          <span class="book-tag">Inclusive</span>
+          <span class="book-tag">Parents</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text" id="preview-1-en">
+          <strong>📖 Preview:</strong> Every child is born with unique gifts. This guide empowers parents, teachers, and caregivers to understand, support, and celebrate children with special needs. From IEP planning to classroom strategies, discover proven tools that transform challenges into opportunities. Whether you are a first-time parent of a special child or a seasoned educator, this book gives you practical wisdom rooted in compassion and science.
+        </div>
+        <div class="tts-bar">
+          <div class="tts-label">🔊 LISTEN IN YOUR LANGUAGE</div>
+          <div class="tts-langs" id="langs-1">
+            <button class="tts-btn active" onclick="selectLang(1,'en-IN','en')">English</button>
+            <button class="tts-btn" onclick="selectLang(1,'ta-IN','ta')">Tamil</button>
+            <button class="tts-btn" onclick="selectLang(1,'te-IN','te')">Telugu</button>
+            <button class="tts-btn" onclick="selectLang(1,'hi-IN','hi')">Hindi</button>
+          </div>
+          <div class="tts-controls">
+            <button class="play-btn" onclick="speakBook(1)">▶ Play Preview</button>
+            <button class="stop-btn" onclick="stopSpeech()">⏹ Stop</button>
+            <span class="tts-status" id="status-1"></span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price">₹250</div>
+          <a class="buy-btn" href="https://rzp.io/rzp/42uyqkUq" target="_blank">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 2 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">🌿</span>
+        <div class="book-title">Nature's Pharmacy</div>
+        <div class="book-tags">
+          <span class="book-tag">Health</span>
+          <span class="book-tag">Herbal</span>
+          <span class="book-tag">Natural</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text" id="preview-2-en">
+          <strong>📖 Preview:</strong> Long before modern medicine, our ancestors healed with the power of nature. This comprehensive guide rediscovers 200+ medicinal plants from Indian traditional systems — Siddha, Ayurveda, and tribal medicine. Learn simple home remedies, seasonal detox methods, and how to build a healing garden. Each plant is explained with illustrations, dosage, and safety notes in all 6 languages.
+        </div>
+        <div class="tts-bar">
+          <div class="tts-label">🔊 LISTEN IN YOUR LANGUAGE</div>
+          <div class="tts-langs" id="langs-2">
+            <button class="tts-btn active" onclick="selectLang(2,'en-IN','en')">English</button>
+            <button class="tts-btn" onclick="selectLang(2,'ta-IN','ta')">Tamil</button>
+            <button class="tts-btn" onclick="selectLang(2,'te-IN','te')">Telugu</button>
+            <button class="tts-btn" onclick="selectLang(2,'ml-IN','ml')">Malayalam</button>
+            <button class="tts-btn" onclick="selectLang(2,'kn-IN','kn')">Kannada</button>
+            <button class="tts-btn" onclick="selectLang(2,'hi-IN','hi')">Hindi</button>
+          </div>
+          <div class="tts-controls">
+            <button class="play-btn" onclick="speakBook(2)">▶ Play Preview</button>
+            <button class="stop-btn" onclick="stopSpeech()">⏹ Stop</button>
+            <span class="tts-status" id="status-2"></span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price">₹175</div>
+          <a class="buy-btn" href="https://rzp.io/rzp/JQ8Cal6" target="_blank">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 3 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">⚖️</span>
+        <div class="book-title">Basic Law Text Books</div>
+        <div class="book-tags">
+          <span class="book-tag">Law</span>
+          <span class="book-tag">Rights</span>
+          <span class="book-tag">Education</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text" id="preview-3-en">
+          <strong>📖 Preview:</strong> Do you know your rights? Most citizens are unaware of the powerful legal protections the Indian Constitution gives them. This book breaks down complex legal language into simple, understandable concepts. From fundamental rights and police powers to consumer protection and land laws — this is the legal handbook every Indian family needs. Written clearly for students, farmers, workers, and common citizens.
+        </div>
+        <div class="tts-bar">
+          <div class="tts-label">🔊 LISTEN IN YOUR LANGUAGE</div>
+          <div class="tts-langs" id="langs-3">
+            <button class="tts-btn active" onclick="selectLang(3,'en-IN','en')">English</button>
+            <button class="tts-btn" onclick="selectLang(3,'ta-IN','ta')">Tamil</button>
+            <button class="tts-btn" onclick="selectLang(3,'te-IN','te')">Telugu</button>
+            <button class="tts-btn" onclick="selectLang(3,'ml-IN','ml')">Malayalam</button>
+            <button class="tts-btn" onclick="selectLang(3,'kn-IN','kn')">Kannada</button>
+          </div>
+          <div class="tts-controls">
+            <button class="play-btn" onclick="speakBook(3)">▶ Play Preview</button>
+            <button class="stop-btn" onclick="stopSpeech()">⏹ Stop</button>
+            <span class="tts-status" id="status-3"></span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price">₹99</div>
+          <a class="buy-btn" href="https://rzp.io/rzp/V5V2VZk" target="_blank">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 4 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">📜</span>
+        <div class="book-title">Basic Law Text Book (Bilingual)</div>
+        <div class="book-tags">
+          <span class="book-tag">Law</span>
+          <span class="book-tag">Bilingual</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text" id="preview-4-en">
+          <strong>📖 Preview:</strong> Learning law is twice as powerful when done in two languages simultaneously. This unique bilingual edition pairs Tamil with English and Telugu with English side by side — perfect for students who want to master legal vocabulary in both their mother tongue and English. Ideal for law entrance exam preparation, civil service aspirants, and first-generation college students building their career.
+        </div>
+        <div class="tts-bar">
+          <div class="tts-label">🔊 LISTEN IN YOUR LANGUAGE</div>
+          <div class="tts-langs" id="langs-4">
+            <button class="tts-btn active" onclick="selectLang(4,'en-IN','en')">English</button>
+            <button class="tts-btn" onclick="selectLang(4,'ta-IN','ta')">Tamil</button>
+            <button class="tts-btn" onclick="selectLang(4,'te-IN','te')">Telugu</button>
+          </div>
+          <div class="tts-controls">
+            <button class="play-btn" onclick="speakBook(4)">▶ Play Preview</button>
+            <button class="stop-btn" onclick="stopSpeech()">⏹ Stop</button>
+            <span class="tts-status" id="status-4"></span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price">₹99</div>
+          <a class="buy-btn" href="https://rzp.io/rzp/fcW9Hv6X" target="_blank">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 5 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">📗</span>
+        <div class="book-title">Sanathanam vs Dravidian Model 2.0</div>
+        <div class="book-tags">
+          <span class="book-tag">Culture</span>
+          <span class="book-tag">History</span>
+          <span class="book-tag">Society</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text" id="preview-5-en">
+          <strong>📖 Preview:</strong> Two powerful worldviews have shaped South India for centuries — and their clash continues today. This analytical work examines Sanathanam's hierarchical social order against the Dravidian model's egalitarian vision. Drawing from history, sociology, literature, and political philosophy, the author presents both perspectives with rigour and fairness. A must-read for anyone who wants to understand modern Tamil Nadu, social justice movements, and the future of Indian democracy.
+        </div>
+        <div class="tts-bar">
+          <div class="tts-label">🔊 LISTEN IN YOUR LANGUAGE</div>
+          <div class="tts-langs" id="langs-5">
+            <button class="tts-btn active" onclick="selectLang(5,'en-IN','en')">English</button>
+            <button class="tts-btn" onclick="selectLang(5,'ta-IN','ta')">Tamil</button>
+            <button class="tts-btn" onclick="selectLang(5,'te-IN','te')">Telugu</button>
+            <button class="tts-btn" onclick="selectLang(5,'ml-IN','ml')">Malayalam</button>
+            <button class="tts-btn" onclick="selectLang(5,'kn-IN','kn')">Kannada</button>
+            <button class="tts-btn" onclick="selectLang(5,'hi-IN','hi')">Hindi</button>
+          </div>
+          <div class="tts-controls">
+            <button class="play-btn" onclick="speakBook(5)">▶ Play Preview</button>
+            <button class="stop-btn" onclick="stopSpeech()">⏹ Stop</button>
+            <span class="tts-status" id="status-5"></span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price">₹200</div>
+          <a class="buy-btn" href="https://rzp.io/rzp/WAOZRNp" target="_blank">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERIYAR SECTION -->
+<section id="periyar">
+  <h2 class="section-title">📜 Thanthai Periyar Research</h2>
+  <p class="section-sub">தந்தை பெரியார் ஆராய்ச்சி · 6 Languages · 6 மொழிகள்</p>
+  <div class="divider"></div>
+
+  <div class="periyar-intro">
+    A monumental research work dedicated to the life, philosophy, and revolutionary legacy of Thanthai Periyar — E.V. Ramasamy Naicker. Available in all 6 languages for the widest reach possible.
+    <div class="periyar-quote">"No man who thinks is my enemy. Ignorance alone is my enemy." — Periyar</div>
+  </div>
+
+  <div class="lang-tabs">
+    <button class="lang-tab active" onclick="showPeriyar('en')">English</button>
+    <button class="lang-tab" onclick="showPeriyar('ta')">தமிழ்</button>
+    <button class="lang-tab" onclick="showPeriyar('te')">తెలుగు</button>
+    <button class="lang-tab" onclick="showPeriyar('ml')">മലയാളം</button>
+    <button class="lang-tab" onclick="showPeriyar('kn')">ಕನ್ನಡ</button>
+    <button class="lang-tab" onclick="showPeriyar('hi')">हिंदी</button>
+  </div>
+
+  <!-- ENGLISH -->
+  <div class="periyar-content active" id="periyar-en">
+    <div class="periyar-card">
+      <h3>Thanthai Periyar — The Rationalist Revolutionary</h3>
+      <div class="sub">Research Preview · English Edition</div>
+      <p>Erode Venkatappa Ramasamy, known as Periyar, was one of the most fearless social reformers the Indian subcontinent has ever produced. Born in 1879 in Erode, Tamil Nadu, he dedicated his entire life to the eradication of caste discrimination, religious superstition, and the oppression of women.</p>
+      <p>This research examines Periyar's philosophical roots — his early disillusionment with Brahminical Hinduism, his transformation through the Self-Respect Movement (1925), and the founding of the Dravidar Kazhagam in 1944. Unlike conventional political biographies, this work analyses Periyar's thought through the lens of rationalism, humanism, and proto-feminist theory.</p>
+      <p>Periyar challenged the very foundations of caste: "Caste is a social institution created by the upper class to perpetuate its privileges," he argued. He was among the first leaders in India to campaign for inter-caste marriages, women's right to divorce, and scientific temperament in public life. His legacy lives in every movement that fights for equality and dignity in South Asia.</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('en-IN','periyar-en')">▶ Listen in English</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ Stop</button>
+        <span class="tts-status" id="status-periyar"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAMIL -->
+  <div class="periyar-content" id="periyar-ta">
+    <div class="periyar-card">
+      <h3>தந்தை பெரியார் — பகுத்தறிவு புரட்சியாளர்</h3>
+      <div class="sub">ஆராய்ச்சி முன்னோட்டம் · தமிழ் பதிப்பு</div>
+      <p>ஈரோடு வெங்கடப்ப இராமசாமி — பெரியார் என்று அன்போடு அழைக்கப்படும் இந்த மாமேதை, இந்திய துணைக்கண்டம் கண்ட மிகத் துணிச்சலான சமூக சீர்திருத்தவாதிகளில் ஒருவர். 1879 ஆம் ஆண்டு தமிழ்நாட்டின் ஈரோட்டில் பிறந்த அவர், தனது வாழ்நாள் முழுவதையும் சாதி பாகுபாடு, மூடநம்பிக்கை, மற்றும் பெண் ஒடுக்குமுறை ஆகியவற்றை ஒழிக்கும் போராட்டத்திற்கே அர்ப்பணித்தார்.</p>
+      <p>இந்த ஆராய்ச்சி நூல், பெரியாரின் தத்துவ வேர்களை ஆழமாக ஆராய்கிறது — 1925 ஆம் ஆண்டு சுயமரியாதை இயக்கம் தொடங்கி, 1944 இல் திராவிட கழகம் நிறுவப்படும் வரையிலான அவரது தொலைநோக்கான பயணத்தை விவரிக்கிறது. "சாதி என்பது மேல்தட்டு மக்கள் தங்கள் சலுகைகளைத் தக்கவைத்துக்கொள்ள உருவாக்கிய சமூக அமைப்பு" என்று அவர் கூறினார்.</p>
+      <p>சாதிகளைக் கடந்த திருமணம், பெண்களின் விவாகரத்து உரிமை, அறிவியல் சிந்தனை ஆகியவற்றுக்காக இந்தியாவில் முதன்முதலில் குரல் கொடுத்தவர் பெரியார். அவரது மரபு தென்னாசியாவின் ஒவ்வொரு சமத்துவ இயக்கத்திலும் தொடர்கிறது.</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('ta-IN','periyar-ta')">▶ தமிழில் கேளுங்கள்</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ நிறுத்து</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELUGU -->
+  <div class="periyar-content" id="periyar-te">
+    <div class="periyar-card">
+      <h3>తంతై పెరియార్ — హేతువాద విప్లవకారుడు</h3>
+      <div class="sub">పరిశోధన పూర్వావలోకనం · తెలుగు సంచిక</div>
+      <p>ఈరోడు వెంకటప్ప రామసామి — ప్రేమతో పెరియార్ అని పిలవబడే ఈ మహానేత, భారత ఉపఖండం చూసిన అత్యంత సాహసోపేత సామాజిక సంస్కర్తలలో ఒకరు. 1879లో తమిళనాడులోని ఈరోడులో జన్మించిన ఆయన, కులవివక్ష, మూఢనమ్మకాలు, మహిళల అణచివేత వంటివాటిని నిర్మూలించడానికి తన జీవితాన్ని అంకితం చేశారు.</p>
+      <p>ఈ పరిశోధన గ్రంథం పెరియార్ తత్త్వశాస్త్రపు మూలాలను లోతుగా అన్వేషిస్తుంది — 1925 స్వాభిమాన ఉద్యమం నుండి 1944లో ద్రావిడ కళగం స్థాపన వరకు ఆయన దూరదృష్టి పూర్వక ప్రయాణాన్ని వివరిస్తుంది. "కులం అనేది అగ్రవర్ణాలు తమ అధికారాన్ని కాపాడుకోవడానికి సృష్టించిన సాంఘిక సంస్థ" అని ఆయన ప్రకటించారు.</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('te-IN','periyar-te')">▶ తెలుగులో వినండి</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ ఆపు</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MALAYALAM -->
+  <div class="periyar-content" id="periyar-ml">
+    <div class="periyar-card">
+      <h3>തന്തൈ പെരിയാർ — യുക്തിവാദ വിപ്ലവകാരി</h3>
+      <div class="sub">ഗവേഷണ പ്രിവ്യൂ · മലയാളം പതിപ്പ്</div>
+      <p>ഈരോഡ് വെങ്കടപ്പ രാമസ്വാമി — സ്നേഹത്തോടെ പെരിയാർ എന്ന് വിളിക്കപ്പെടുന്ന ഈ മഹാനായ നേതാവ്, ഭാരതീയ ഉപഭൂഖണ്ഡം കണ്ട ഏറ്റവും ധൈര്യശാലിയായ സാമൂഹ്യ പരിഷ്കർത്താക്കളിൽ ഒരാളാണ്. 1879-ൽ തമിഴ്‌നാട്ടിലെ ഈരോഡിൽ ജനിച്ച അദ്ദേഹം, ജാതിവ്യത്യാസം, അന്ധവിശ്വാസം, സ്ത്രീ അടിമത്തം എന്നിവ ഇല്ലാതാക്കുന്നതിനായി തന്റെ ജീവൻ ഉഴിഞ്ഞുവച്ചു.</p>
+      <p>ഈ ഗവേഷണ ഗ്രന്ഥം പെരിയാറിന്റെ ദർശനത്തിന്റെ വേരുകൾ ആഴത്തിൽ അന്വേഷിക്കുന്നു — 1925-ലെ സ്വാഭിമാന പ്രസ്ഥാനം മുതൽ 1944-ൽ ദ്രാവിഡ കഴകം സ്ഥാപിക്കുന്നതുവരെ അദ്ദേഹത്തിന്റെ ദൂരദർശിത്വമുള്ള യാത്ര വിവരിക്കുന്നു.</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('ml-IN','periyar-ml')">▶ മലയാളത്തിൽ കേൾക്കൂ</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ നിർത്തുക</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KANNADA -->
+  <div class="periyar-content" id="periyar-kn">
+    <div class="periyar-card">
+      <h3>ತಂದೆ ಪೆರಿಯಾರ್ — ತಾರ್ಕಿಕ ಕ್ರಾಂತಿಕಾರಿ</h3>
+      <div class="sub">ಸಂಶೋಧನಾ ಮುನ್ನೋಟ · ಕನ್ನಡ ಆವೃತ್ತಿ</div>
+      <p>ಈರೋಡು ವೆಂಕಟಪ್ಪ ರಾಮಸ್ವಾಮಿ — ಪ್ರೀತಿಯಿಂದ ಪೆರಿಯಾರ್ ಎಂದು ಕರೆಯಲ್ಪಡುವ ಈ ಮಹಾನಾಯಕ, ಭಾರತೀಯ ಉಪಖಂಡ ಕಂಡ ಅತ್ಯಂತ ಧೈರ್ಯಶಾಲಿ ಸಾಮಾಜಿಕ ಸುಧಾರಕರಲ್ಲಿ ಒಬ್ಬರು. 1879ರಲ್ಲಿ ತಮಿಳುನಾಡಿನ ಈರೋಡಿನಲ್ಲಿ ಜನಿಸಿದ ಅವರು, ಜಾತಿ ತಾರತಮ್ಯ, ಮೂಢನಂಬಿಕೆ ಮತ್ತು ಮಹಿಳೆಯರ ಶೋಷಣೆಯನ್ನು ನಿರ್ಮೂಲನ ಮಾಡಲು ತಮ್ಮ ಜೀವನವನ್ನು ಅರ್ಪಿಸಿದರು.</p>
+      <p>ಈ ಸಂಶೋಧನಾ ಗ್ರಂಥ ಪೆರಿಯಾರ್ ಅವರ ತತ್ತ್ವಶಾಸ್ತ್ರದ ಮೂಲಗಳನ್ನು ಆಳವಾಗಿ ಅನ್ವೇಷಿಸುತ್ತದೆ — 1925ರ ಸ್ವಾಭಿಮಾನ ಚಳವಳಿಯಿಂದ 1944ರಲ್ಲಿ ದ್ರಾವಿಡ ಕಳಗ ಸ್ಥಾಪನೆಯವರೆಗಿನ ಅವರ ದೂರದೃಷ್ಟಿಯ ಪ್ರಯಾಣವನ್ನು ವಿವರಿಸುತ್ತದೆ.</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('kn-IN','periyar-kn')">▶ ಕನ್ನಡದಲ್ಲಿ ಕೇಳಿ</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ ನಿಲ್ಲಿಸು</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HINDI -->
+  <div class="periyar-content" id="periyar-hi">
+    <div class="periyar-card">
+      <h3>थंथाई पेरियार — तर्कशील क्रांतिकारी</h3>
+      <div class="sub">शोध पूर्वावलोकन · हिंदी संस्करण</div>
+      <p>ईरोड वेंकटप्पा रामास्वामी — प्यार से पेरियार कहे जाने वाले इस महापुरुष ने भारतीय उपमहाद्वीप में सबसे साहसी सामाजिक सुधारकों में से एक की भूमिका निभाई। 1879 में तमिलनाडु के ईरोड में जन्मे उन्होंने अपना सम्पूर्ण जीवन जातिभेद, धार्मिक अंधविश्वास और महिलाओं के उत्पीड़न को समाप्त करने के संघर्ष में अर्पित कर दिया।</p>
+      <p>यह शोध ग्रंथ पेरियार के दर्शन की जड़ों की गहराई से पड़ताल करता है — 1925 के स्वाभिमान आंदोलन से लेकर 1944 में द्रविड़ कळगम की स्थापना तक उनकी दूरदर्शी यात्रा का वर्णन करता है। "जाति एक ऐसी सामाजिक संस्था है जिसे उच्च वर्ग ने अपने विशेषाधिकारों को बनाए रखने के लिए बनाया," — यह पेरियार का घोषणा था।</p>
+      <p>अंतरजातीय विवाह, महिलाओं के तलाक के अधिकार और सार्वजनिक जीवन में वैज्ञानिक दृष्टिकोण के लिए भारत में सबसे पहले आवाज उठाने वाले पेरियार की विरासत दक्षिण एशिया के प्रत्येक समानता आंदोलन में जीवित है।</p>
+      <div class="periyar-tts">
+        <button class="periyar-play" onclick="speakPeriyar('hi-IN','periyar-hi')">▶ हिंदी में सुनें</button>
+        <button class="periyar-stop" onclick="stopSpeech()">⏹ रोकें</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px;">
+    <a class="buy-btn" href="https://rzp.io/rzp/mZMZeHC" target="_blank" style="font-size:1rem;padding:13px 32px;">🛒 Buy Periyar Research Book — ₹250</a>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section id="bundle">
+  <h2 class="section-title">🎁 Bundle Offer</h2>
+  <div class="divider"></div>
+  <div class="bundle-card">
+    <h3>Complete Book Bundle</h3>
+    <p style="color:#d4a04a;">All 5 Books · Tamil, Telugu, Malayalam, Kannada, Hindi & English</p>
+    <div class="bundle-price">₹1000</div>
+    <div class="bundle-sub">Save ₹200+ · Free for all 6 language editions</div>
+    <a class="bundle-buy" href="https://rzp.io/rzp/ogRdyIrA" target="_blank">🛒 Buy Bundle Now</a>
+    <p style="margin-top:20px;color:#9a8060;font-size:0.82rem;">Secure payment via Razorpay · Instant digital delivery</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Velugeetha Books</span> · వెలుగీత పుస్తకాలు · வெளுகீத புத்தகங்கள்</p>
+  <p style="margin-top:6px;">Accessible Knowledge for Every Student · <span>♿ Inclusive Edition</span></p>
+</footer>
+
+<script>
+// ===== TTS STATE =====
+const bookLangs = {1:'en-IN',2:'en-IN',3:'en-IN',4:'en-IN',5:'en-IN'};
+
+function selectLang(bookId, langCode, langKey){
+  bookLangs[bookId] = langCode;
+  const btns = document.querySelectorAll(`#langs-${bookId} .tts-btn`);
+  btns.forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function getBookText(bookId, lang){
+  const texts = {
+    1:{
+      'en-IN':"Every child is born with unique gifts. This guide empowers parents, teachers, and caregivers to understand, support, and celebrate children with special needs. From IEP planning to classroom strategies, discover proven tools that transform challenges into opportunities.",
+      'ta-IN':"ஒவ்வொரு குழந்தையும் தனிப்பட்ட திறன்களுடன் பிறக்கிறது. இந்த வழிகாட்டி, சிறப்பு தேவை கொண்ட குழந்தைகளை புரிந்துகொண்டு ஆதரிக்க பெற்றோர், ஆசிரியர்கள், மற்றும் பராமரிப்பாளர்களுக்கு உதவுகிறது.",
+      'te-IN':"ప్రతి పిల్లవాడు ప్రత్యేక బహుమతులతో జన్మిస్తారు. ఈ గైడ్ తల్లిదండ్రులు, ఉపాధ్యాయులు మరియు సంరక్షకులకు ప్రత్యేక అవసరాలున్న పిల్లలను అర్థం చేసుకుని, మద్దతు ఇవ్వడానికి శక్తి ఇస్తుంది.",
+      'hi-IN':"हर बच्चा अनूठी प्रतिभाओं के साथ जन्म लेता है। यह मार्गदर्शिका माता-पिता, शिक्षकों और देखभालकर्ताओं को विशेष आवश्यकताओं वाले बच्चों को समझने और समर्थन देने में सशक्त बनाती है।"
+    },
+    2:{
+      'en-IN':"Long before modern medicine, our ancestors healed with the power of nature. This comprehensive guide rediscovers 200 plus medicinal plants from Indian traditional systems. Learn simple home remedies, seasonal detox methods, and how to build a healing garden.",
+      'ta-IN':"நவீன மருத்துவத்திற்கு எத்தனையோ ஆண்டுகளுக்கு முன்பே, நம் முன்னோர்கள் இயற்கையின் சக்தியால் குணமடைந்தனர். இந்த விரிவான வழிகாட்டி இந்திய பாரம்பரிய மருத்துவ முறைகளிலிருந்து 200 க்கும் மேற்பட்ட மூலிகை தாவரங்களை மீண்டும் கண்டுபிடிக்கிறது.",
+      'te-IN':"ఆధునిక వైద్యానికి చాలా ముందే, మన పూర్వీకులు ప్రకృతి శక్తితో నయం చేసుకున్నారు. ఈ సమగ్ర గైడ్ భారతీయ సంప్రదాయ వైద్య విధానాల నుండి 200 కంటే ఎక్కువ ఔషధ మొక్కలను మళ్లీ కనుగొంటుంది.",
+      'ml-IN':"ആധുനിക വൈദ്യശാസ്ത്രത്തിന് വളരെ മുമ്പ്, നമ്മുടെ പൂർവ്വ പിതാക്കന്മാർ പ്രകൃതിയുടെ ശക്തി ഉപയോഗിച്ച് സൗഖ്യം പ്രാപിച്ചു. ഈ സമഗ്രമായ ഗൈഡ് ഇന്ത്യൻ പഴമൊഴി വൈദ്യ സമ്പ്രദായങ്ങളിൽ നിന്ന് 200 ലധികം ഔഷധ സസ്യങ്ങളെ വീണ്ടും കണ്ടെത്തുന്നു.",
+      'kn-IN':"ಆಧುನಿಕ ವೈದ್ಯಶಾಸ್ತ್ರಕ್ಕೆ ಬಹಳ ಮೊದಲೇ, ನಮ್ಮ ಪೂರ್ವಜರು ಪ್ರಕೃತಿಯ ಶಕ್ತಿಯಿಂದ ಗುಣವಾಗಿದ್ದರು. ಈ ಸಮಗ್ರ ಮಾರ್ಗದರ್ಶಿ ಭಾರತೀಯ ಸಾಂಪ್ರದಾಯಿಕ ವೈದ್ಯ ಪದ್ಧತಿಗಳಿಂದ 200 ಕ್ಕೂ ಹೆಚ್ಚು ಔಷಧೀಯ ಸಸ್ಯಗಳನ್ನು ಮತ್ತೆ ಕಂಡುಕೊಳ್ಳುತ್ತದೆ.",
+      'hi-IN':"आधुनिक चिकित्सा से बहुत पहले, हमारे पूर्वज प्रकृति की शक्ति से ठीक होते थे। यह व्यापक मार्गदर्शिका भारतीय पारंपरिक चिकित्सा प्रणालियों से 200 से अधिक औषधीय पौधों को फिर से खोजती है।"
+    },
+    3:{
+      'en-IN':"Do you know your rights? Most citizens are unaware of the powerful legal protections the Indian Constitution gives them. This book breaks down complex legal language into simple understandable concepts. From fundamental rights and police powers to consumer protection and land laws.",
+      'ta-IN':"உங்கள் உரிமைகள் தெரியுமா? இந்திய அரசியலமைப்பு வழங்கும் சக்திவாய்ந்த சட்ட பாதுகாப்புகளை பெரும்பாலான குடிமக்கள் அறியார்கள். இந்த புத்தகம் சிக்கலான சட்ட மொழியை எளிய புரிந்துகொள்ளக்கூடிய கருத்துக்களாக உடைக்கிறது.",
+      'te-IN':"మీ హక్కులు తెలుసా? భారత రాజ్యాంగం ఇచ్చే శక్తివంతమైన చట్టపరమైన రక్షణల గురించి చాలా మంది పౌరులకు తెలియదు. ఈ పుస్తకం సంక్లిష్టమైన చట్టపరమైన భాషను సరళమైన అర్థమయ్యే భావనలుగా విభజిస్తుంది.",
+      'ml-IN':"നിങ്ങളുടെ അവകാശങ്ങൾ അറിയാമോ? ഇന്ത്യൻ ഭരണഘടന നൽകുന്ന ശക്തമായ നിയമ സംരക്ഷണങ്ങളെക്കുറിച്ച് മിക്ക പൗരന്മാർക്കും അറിയില്ല. ഈ പുസ്തകം സങ്കീർണ്ണമായ നിയമ ഭാഷയെ ലളിതമായ മനസ്സിലാക്കാവുന്ന ആശയങ്ങളായി വിഭജിക്കുന്നു.",
+      'kn-IN':"ನಿಮ್ಮ ಹಕ್ಕುಗಳು ತಿಳಿದಿವೆಯೇ? ಭಾರತೀಯ ಸಂವಿಧಾನ ನೀಡುವ ಶಕ್ತಿಶಾಲಿ ಕಾನೂನು ರಕ್ಷಣೆಗಳ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ನಾಗರಿಕರಿಗೆ ತಿಳಿದಿಲ್ಲ. ಈ ಪುಸ್ತಕ ಸಂಕೀರ್ಣ ಕಾನೂನು ಭಾಷೆಯನ್ನು ಸರಳ ಅರ್ಥವಾಗುವ ಪರಿಕಲ್ಪನೆಗಳಾಗಿ ವಿಭಜಿಸುತ್ತದೆ."
+    },
+    4:{
+      'en-IN':"Learning law is twice as powerful when done in two languages simultaneously. This unique bilingual edition pairs Tamil with English and Telugu with English side by side. Perfect for law entrance exam preparation and civil service aspirants.",
+      'ta-IN':"இரண்டு மொழிகளில் ஒரே நேரத்தில் சட்டம் கற்பது இரு மடங்கு சக்திவாய்ந்தது. இந்த தனித்துவமான இருமொழி பதிப்பு தமிழ் மற்றும் ஆங்கிலத்தை பக்கத்தில் இணைக்கிறது. சட்ட நுழைவு தேர்வு தயாரிப்பு மற்றும் அரசுப் பணி வேட்பாளர்களுக்கு சிறந்தது.",
+      'te-IN':"రెండు భాషలలో ఒకేసారి చట్టం నేర్చుకోవడం రెండింతలు శక్తివంతంగా ఉంటుంది. ఈ ప్రత్యేక ద్విభాషా సంచిక తెలుగు మరియు ఆంగ్లాన్ని పక్కపక్కన జతపరుస్తుంది. చట్ట ప్రవేశ పరీక్ష తయారీ మరియు సివిల్ సర్వీసెస్ అభ్యర్థులకు అనువైనది."
+    },
+    5:{
+      'en-IN':"Two powerful worldviews have shaped South India for centuries and their clash continues today. This analytical work examines Sanathanam's hierarchical social order against the Dravidian model's egalitarian vision. A must-read for anyone who wants to understand modern Tamil Nadu, social justice movements, and the future of Indian democracy.",
+      'ta-IN':"இரண்டு சக்திவாய்ந்த உலகக் கோட்பாடுகள் நூற்றாண்டுகளாக தென்னிந்தியாவை வடிவமைத்துள்ளன, அவற்றின் மோதல் இன்றும் தொடர்கிறது. இந்த ஆய்வு நூல் சனாதனத்தின் படிநிலை சமூக ஒழுங்கை திராவிட மாதிரியின் சமத்துவ தரிசனத்திற்கு எதிராக ஆய்வு செய்கிறது.",
+      'te-IN':"రెండు శక్తివంతమైన ప్రపంచ దృక్కోణాలు శతాబ్దాలుగా దక్షిణ భారతాన్ని రూపొందించాయి మరియు వాటి ఘర్షణ నేటికీ కొనసాగుతోంది. ఈ విశ్లేషణాత్మక రచన సనాతనత్వం యొక్క సోపాన సామాజిక వ్యవస్థను ద్రావిడ నమూనా యొక్క సమతావాద దృష్టికి వ్యతిరేకంగా పరీక్షిస్తుంది.",
+      'ml-IN':"രണ്ട് ശക്തമായ ലോകദർശനങ്ങൾ നൂറ്റാണ്ടുകളായി ദക്ഷിണേന്ത്യയെ രൂപപ്പെടുത്തി, അവയുടെ ഏറ്റുമുട്ടൽ ഇന്നും തുടരുന്നു. ഈ വിശകലന കൃതി സനാതനത്തിന്റെ ശ്രേണിപരമായ സാമൂഹ്യ ക്രമത്തെ ദ്രാവിഡ മാതൃകയുടെ സമത്വ ദർശനത്തിനെതിരെ പരിശോധിക്കുന്നു.",
+      'kn-IN':"ಎರಡು ಶಕ್ತಿಶಾಲಿ ಜಾಗತಿಕ ದೃಷ್ಟಿಕೋನಗಳು ಶತಮಾನಗಳಿಂದ ದಕ್ಷಿಣ ಭಾರತವನ್ನು ರೂಪಿಸಿವೆ, ಮತ್ತು ಅವುಗಳ ಸಂಘರ್ಷ ಇಂದಿಗೂ ಮುಂದುವರಿಯುತ್ತಿದೆ. ಈ ವಿಶ್ಲೇಷಣಾತ್ಮಕ ಕೃತಿ ಸನಾತನದ ಶ್ರೇಣೀಬದ್ಧ ಸಾಮಾಜಿಕ ಕ್ರಮವನ್ನು ದ್ರಾವಿಡ ಮಾದರಿಯ ಸಮಾನತಾ ದೃಷ್ಟಿಗೆ ವಿರುದ್ಧವಾಗಿ ಪರಿಶೀಲಿಸುತ್ತದೆ.",
+      'hi-IN':"दो शक्तिशाली विश्वदृष्टिकोणों ने सदियों से दक्षिण भारत को आकार दिया है और उनका टकराव आज भी जारी है। यह विश्लेषणात्मक कार्य सनातन की श्रेणीबद्ध सामाजिक व्यवस्था को द्रविड़ मॉडल की समतावादी दृष्टि के विरुद्ध परीक्षित करता है।"
+    }
+  };
+  const langTexts = texts[bookId];
+  return langTexts[lang] || langTexts['en-IN'];
+}
+
+function speakBook(bookId){
+  stopSpeech();
+  const lang = bookLangs[bookId];
+  const text = getBookText(bookId, lang);
+  const status = document.getElementById(`status-${bookId}`);
+  speak(text, lang, status);
+}
+
+function speakPeriyar(lang, sectionId){
+  stopSpeech();
+  const section = document.getElementById(sectionId);
+  const paras = section.querySelectorAll('p');
+  let text = '';
+  paras.forEach(p => text += p.innerText + ' ');
+  const status = document.getElementById('status-periyar');
+  speak(text, lang, status);
+}
+
+function speak(text, lang, statusEl){
+  if(!('speechSynthesis' in window)){
+    if(statusEl) statusEl.innerHTML = '⚠️ Not supported in this browser';
+    return;
+  }
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = lang;
+  utter.rate = 0.92;
+  utter.pitch = 1;
+  if(statusEl){
+    statusEl.innerHTML = '<span class="reading-dot"></span> Reading...';
+    utter.onend = () => statusEl.innerHTML = '✅ Done';
+    utter.onerror = () => statusEl.innerHTML = '⚠️ Error';
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function stopSpeech(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  document.querySelectorAll('.tts-status').forEach(s=>s.innerHTML='');
+}
+
+// ===== PERIYAR TABS =====
+function showPeriyar(lang){
+  document.querySelectorAll('.periyar-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.lang-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('periyar-'+lang).classList.add('active');
+  event.target.classList.add('active');
+  stopSpeech();
+}
+
+// ===== ACCESSIBILITY =====
+let fontSize = 16;
+function changeFontSize(dir){
+  fontSize = Math.min(22, Math.max(12, fontSize + dir*2));
+  document.body.style.fontSize = fontSize+'px';
+}
+let highContrast = false;
+function toggleContrast(){
+  highContrast = !highContrast;
+  if(highContrast){
+    document.documentElement.style.setProperty('--bg','#000');
+    document.documentElement.style.setProperty('--card-bg','#111');
+    document.documentElement.style.setProperty('--dark','#fff');
+    document.documentElement.style.setProperty('--border','#666');
+    document.body.style.background='#000';
+  } else {
+    document.documentElement.style.setProperty('--bg','#fef9f0');
+    document.documentElement.style.setProperty('--card-bg','#fffdf5');
+    document.documentElement.style.setProperty('--dark','#1a1008');
+    document.documentElement.style.setProperty('--border','#e8d5a0');
+    document.body.style.background='#fef9f0';
+  }
+}
+</script>
+</body>
+</html>
