@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geethavelu Digital Books — Buy Now</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1a14;
+      --surface:   #172112;
+      --card:      #1e2d1a;
+      --border:    #2d4428;
+      --amber:     #e8a838;
+      --amber-lt:  #f5c96a;
+      --sage:      #7cad6e;
+      --text:      #e8e4d8;
+      --muted:     #8fa285;
+      --price:     #f5c96a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Decorative background ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 15% 20%, rgba(124,173,110,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 85% 80%, rgba(232,168,56,.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Hero ── */
+    header {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 64px 24px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    header .leaf { font-size: 2.4rem; margin-bottom: 12px; }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--amber-lt), var(--sage));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 1rem;
+      letter-spacing: .03em;
+    }
+
+    /* ── Main layout ── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ── Book section ── */
+    .book-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeUp .55s ease both;
+    }
+    .book-section:nth-child(1) { animation-delay: .05s }
+    .book-section:nth-child(2) { animation-delay: .15s }
+    .book-section:nth-child(3) { animation-delay: .25s }
+    .book-section:nth-child(4) { animation-delay: .35s }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .book-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(46,69,40,.6), transparent);
+    }
+    .book-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--amber), var(--sage));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .book-meta { flex: 1; }
+    .book-meta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--amber-lt);
+      margin-bottom: 4px;
+    }
+    .book-meta p { color: var(--muted); font-size: .88rem; }
+    .book-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--price);
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    /* ── Button grid ── */
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+    .btn-cell {
+      background: var(--card);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: background .2s;
+    }
+    .btn-cell:hover { background: var(--surface); }
+    .lang-label {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+    .btn-cell.bundle .lang-label { color: var(--amber); }
+    .btn-cell.bilingual .lang-label { color: #a89ee0; }
+
+    /* ── Razorpay button wrapper ── */
+    .rzp-wrap { line-height: 0; }
+    .rzp-wrap form { display: block; }
+
+    /* ── Links section ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      padding: 24px 28px;
+    }
+    .pay-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: .88rem;
+      transition: border-color .2s, background .2s;
+    }
+    .pay-link:hover { border-color: var(--amber); background: rgba(232,168,56,.08); }
+    .pay-link .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .pay-link .lamt { margin-left: auto; color: var(--price); font-weight: 500; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    footer a { color: var(--sage); text-decoration: none; }
+    footer a:hover { color: var(--amber-lt); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="leaf">📚</div>
+  <h1>Geethavelu Digital Books</h1>
+  <p>Select your language edition and complete your purchase securely via Razorpay</p>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════════
+       1. NATURE'S PHARMACY
+  ═══════════════════════════════════════ -->
+  <div class="book-section">
+    <div class="book-header">
+      <div class="book-icon">🌿</div>
+      <div class="book-meta">
+        <h2>Nature's Pharmacy</h2>
+        <p>Available in 5 languages · Special Education Guide</p>
+      </div>
+      <div class="book-price">₹175 / book</div>
+    </div>
+    <div class="btn-grid">
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Tamil</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKgGD4NcEmADu" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇬🇧 English</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKjzTBXkP6XCh" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Telugu</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKm5j6OjqjnsH" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Kannada</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKpNlYQJ7j0s3" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Malayalam</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKrfrZQROH0rG" async></script></form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       2. BASIC LAW
+  ═══════════════════════════════════════ -->
+  <div class="book-section">
+    <div class="book-header">
+      <div class="book-icon">⚖️</div>
+      <div class="book-meta">
+        <h2>Basic Law</h2>
+        <p>Text books in 5 languages + Bilingual edition</p>
+      </div>
+      <div class="book-price">₹99 / book</div>
+    </div>
+    <div class="btn-grid">
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Tamil</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkKzcIBp1GbTFj" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇬🇧 English</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkL2GruyCewRyy" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Malayalam</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkL51XSG7CDEbZ" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Kannada</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkL7MRa5KZHGAq" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Telugu</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkLA2Yl8mSOkI4" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell bilingual">
+        <span class="lang-label">📖 Bilingual</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SkLFAakZociPHA" async></script></form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       3. SANATHANAMUM
+  ═══════════════════════════════════════ -->
+  <div class="book-section">
+    <div class="book-header">
+      <div class="book-icon">🕉️</div>
+      <div class="book-meta">
+        <h2>Sanathanamum vs Dravidian Model 2.0</h2>
+        <p>Available in 6 languages + Bundle offer</p>
+      </div>
+      <div class="book-price">₹200 / book</div>
+    </div>
+    <div class="btn-grid">
+      <div class="btn-cell">
+        <span class="lang-label">🇬🇧 English</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sjk0lOhR8e4yui" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Tamil</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sjk55cXroJ87Jk" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Telugu</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sjk7tmNRRtAHwQ" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Malayalam</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SjkBfulImFTtJu" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Kannada</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SjkEDM3VJLiZuw" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Hindi</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SjkHhCYRiQ7ecl" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell bundle">
+        <span class="lang-label">🎁 Bundle Offer</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SjkKfvJVupx201" async></script></form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       4. VELUGEETHA BOOKS (Bundle)
+  ═══════════════════════════════════════ -->
+  <div class="book-section">
+    <div class="book-header">
+      <div class="book-icon">📖</div>
+      <div class="book-meta">
+        <h2>Velugeetha Books</h2>
+        <p>Complete collection — 6 languages + Bundle</p>
+      </div>
+      <div class="book-price">₹1000 / bundle</div>
+    </div>
+    <div class="btn-grid">
+      <div class="btn-cell bundle">
+        <span class="lang-label">🎁 Bundle Offer (All 6)</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj2aBCrTKUWuBR" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Tamil</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj2EadvO03p45x" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇬🇧 English</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj1KfPQd9D7mWZ" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Malayalam</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj2WuHmwNRZ0C7" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Kannada</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj2TwXcvGNVYcu" async></script></form>
+        </div>
+      </div>
+      <div class="btn-cell">
+        <span class="lang-label">🇮🇳 Telugu</span>
+        <div class="rzp-wrap">
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Sj2QOexSWtHm5k" async></script></form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direct payment links -->
+    <div style="padding: 0 28px 8px; margin-top: 4px;">
+      <p style="font-size:.78rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px;">Or pay directly via link</p>
+    </div>
+    <div class="links-grid" style="padding-top:0">
+      <a class="pay-link" href="https://rzp.io/rzp/ogRdyIrA" target="_blank"><span class="dot"></span> Bundle Link <span class="lamt">₹1000</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/42uyqkUq" target="_blank"><span class="dot"></span> Language Link 1 <span class="lamt">₹250</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/JQ8Cal6"  target="_blank"><span class="dot"></span> Language Link 2 <span class="lamt">₹250</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/V5V2VZk"  target="_blank"><span class="dot"></span> Language Link 3 <span class="lamt">₹250</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/fcW9Hv6X" target="_blank"><span class="dot"></span> Language Link 4 <span class="lamt">₹250</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/WAOZRNp"  target="_blank"><span class="dot"></span> Language Link 5 <span class="lamt">₹250</span></a>
+      <a class="pay-link" href="https://rzp.io/rzp/mZMZeHC"  target="_blank"><span class="dot"></span> Language Link 6 <span class="lamt">₹250</span></a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2024 Geethavelu Digital Books &nbsp;·&nbsp; <a href="https://srvelu61-ai.github.io/velugeetha-books/" target="_blank">Visit our website</a> &nbsp;·&nbsp; Payments secured by Razorpay</p>
+</footer>
+
+</body>
+</html>
