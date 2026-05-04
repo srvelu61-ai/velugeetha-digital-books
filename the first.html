@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velugeetha Digital Books — வேலுகீதா டிஜிட்டல் புத்தகங்கள்</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tiro+Tamil:ital@0;1&family=Noto+Sans+Tamil:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c8860a;
+  --deep-gold: #a06800;
+  --saffron: #e8940a;
+  --cream: #fdf6e3;
+  --dark: #1a1008;
+  --brown: #3d1f00;
+  --warm-gray: #7a6a55;
+  --accent-red: #b5280a;
+  --light-gold: #f5dfa0;
+  --bg: #fef9f0;
+  --card-bg: #fffdf5;
+  --border: #e8d5a0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--dark);font-family:'Lato',sans-serif;line-height:1.7;}
+
+/* ACCESSIBILITY BAR */
+.access-bar{background:var(--brown);color:#fde68a;padding:8px 20px;display:flex;justify-content:flex-end;gap:10px;align-items:center;font-size:0.8rem;}
+.access-bar button{background:rgba(255,255,255,0.1);border:1px solid rgba(200,134,10,0.4);color:#fde68a;padding:3px 10px;border-radius:6px;cursor:pointer;font-size:0.8rem;}
+.access-bar button:hover{background:var(--gold);color:#fff;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1a0a00 0%,#3d1500 40%,#6b2a00 100%);color:#fff;padding:70px 20px 60px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,134,10,0.3) 0%,transparent 70%);}
+.hero-lamp{font-size:3.5rem;margin-bottom:12px;display:block;animation:glow 3s ease-in-out infinite alternate;}
+@keyframes glow{from{filter:drop-shadow(0 0 8px #ffaa00);}to{filter:drop-shadow(0 0 24px #ffcc44);}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;letter-spacing:-0.5px;color:#fde68a;position:relative;}
+.hero-sub{font-family:'Tiro Tamil',serif;font-size:1.3rem;color:#fcd97a;margin-top:6px;position:relative;}
+.lang-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px;position:relative;}
+.lang-tag{background:rgba(255,255,255,0.12);border:1px solid rgba(200,134,10,0.5);color:#fde68a;padding:5px 16px;border-radius:20px;font-size:0.85rem;letter-spacing:0.5px;}
+.badge-hero{display:inline-block;background:#c8860a;color:#fff;padding:4px 14px;border-radius:20px;font-size:0.8rem;font-weight:700;letter-spacing:1px;margin-top:18px;position:relative;}
+
+/* NAV */
+nav{background:var(--brown);padding:0 20px;display:flex;justify-content:center;gap:4px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+nav a{color:#fde68a;text-decoration:none;padding:14px 16px;font-size:0.88rem;font-weight:700;letter-spacing:0.5px;border-bottom:3px solid transparent;transition:border-color 0.2s,color 0.2s;}
+nav a:hover{border-bottom-color:var(--gold);color:#fff;}
+
+/* SECTION */
+section{padding:60px 20px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--brown);text-align:center;margin-bottom:8px;}
+.section-sub{text-align:center;color:var(--warm-gray);margin-bottom:40px;font-size:1rem;}
+.divider{width:80px;height:3px;background:linear-gradient(90deg,var(--gold),var(--saffron));margin:12px auto 40px;border-radius:2px;}
+
+/* OFFER BANNER */
+.offer-banner{background:var(--accent-red);color:#fff;text-align:center;padding:12px;font-size:1rem;font-weight:700;letter-spacing:1px;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.85;}}
+
+/* BOOKS GRID */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+
+/* BOOK CARD */
+.book-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(100,60,0,0.08);transition:transform 0.3s,box-shadow 0.3s;display:flex;flex-direction:column;}
+.book-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(100,60,0,0.16);}
+.book-header{padding:22px 22px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#fffbee,#fef3cc);}
+.book-icon{font-size:2.2rem;margin-bottom:8px;display:block;}
+.book-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--brown);margin-bottom:6px;}
+.book-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.book-tag{background:var(--light-gold);color:var(--deep-gold);padding:2px 10px;border-radius:12px;font-size:0.73rem;font-weight:700;letter-spacing:0.5px;}
+
+/* dark tag for MindTraps */
+.book-card.dark .book-header{background:linear-gradient(135deg,#1a1a3e,#141436);}
+.book-card.dark .book-title{color:#f0c860;}
+.book-card.dark .book-tag{background:rgba(212,168,67,0.15);color:#d4a843;}
+.book-card.dark{background:#1a1a3e;border-color:rgba(212,168,67,0.2);}
+.book-card.dark .book-body{background:#1a1a3e;}
+.book-card.dark .book-preview-text{color:rgba(245,240,232,0.75);}
+.book-card.dark .price-row{border-color:rgba(212,168,67,0.2);}
+.book-card.dark .price{color:#f0c860;}
+
+.book-body{padding:20px 22px;flex:1;display:flex;flex-direction:column;}
+.book-preview-text{font-size:0.93rem;color:#4a3520;line-height:1.75;margin-bottom:16px;flex:1;}
+.price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid var(--border);}
+.price{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--deep-gold);}
+
+.view-btn{background:linear-gradient(135deg,var(--accent-red),#8b1a00);color:#fff;border:none;padding:9px 22px;border-radius:9px;font-weight:700;font-size:0.88rem;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity 0.2s,transform 0.1s;letter-spacing:0.5px;}
+.view-btn:hover{opacity:0.88;transform:scale(1.03);}
+.view-btn.gold-btn{background:linear-gradient(135deg,#c8860a,#e8940a);color:#1a0800;}
+
+/* BUNDLE */
+#bundle{background:linear-gradient(135deg,#3d1500,#6b2a00);}
+#bundle .section-title{color:#fde68a;}
+#bundle .divider{background:linear-gradient(90deg,#fde68a,#c8860a);}
+.bundle-card{max-width:600px;margin:0 auto;background:rgba(255,255,255,0.08);border:2px solid var(--gold);border-radius:20px;padding:36px;text-align:center;color:#fff;}
+.bundle-card h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fde68a;margin-bottom:8px;}
+.bundle-price{font-family:'Playfair Display',serif;font-size:3rem;color:#fde68a;font-weight:900;margin:16px 0 8px;}
+.bundle-sub{color:#d4a04a;margin-bottom:24px;}
+.bundle-buy{background:linear-gradient(135deg,#c8860a,#e8940a);color:#1a0800;border:none;padding:14px 40px;border-radius:12px;font-size:1rem;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;letter-spacing:1px;transition:transform 0.2s,opacity 0.2s;}
+.bundle-buy:hover{transform:scale(1.04);opacity:0.92;}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(253,246,227,0.6);text-align:center;padding:30px 20px;font-size:0.88rem;}
+footer span{color:var(--gold);}
+
+@media(max-width:600px){.books-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ACCESSIBILITY BAR -->
+<div class="access-bar">
+  <span>♿ Accessibility:</span>
+  <button onclick="changeFontSize(1)">A+</button>
+  <button onclick="changeFontSize(-1)">A−</button>
+  <button onclick="toggleContrast()">⬛ High Contrast</button>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-lamp">🪔</span>
+  <h1>Velugeetha Books</h1>
+  <div class="hero-sub">வேலுகீதா டிஜிட்டல் புத்தகங்கள்</div>
+  <div class="lang-tags">
+    <span class="lang-tag">தமிழ் Tamil</span>
+    <span class="lang-tag">తెలుగు Telugu</span>
+    <span class="lang-tag">മലയാളം Malayalam</span>
+    <span class="lang-tag">ಕನ್ನಡ Kannada</span>
+    <span class="lang-tag">हिंदी Hindi</span>
+    <span class="lang-tag">English</span>
+  </div>
+  <div class="badge-hero">🔊 LISTEN · READ · LEARN · BUY</div>
+</header>
+
+<div class="offer-banner">🎉 Inaugural Offer — Limited Time Only! 🎉</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#books">📚 Our Books</a>
+  <a href="#bundle">🎁 Bundle Offer</a>
+</nav>
+
+<!-- BOOKS SECTION -->
+<section id="books">
+  <h2 class="section-title">📖 Our Books</h2>
+  <p class="section-sub">Click on any book to see all language editions &amp; buy</p>
+  <div class="divider"></div>
+
+  <div class="books-grid">
+
+    <!-- BOOK 1: SPECIAL EDUCATION -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">🎓</span>
+        <div class="book-title">Special Education Guide</div>
+        <div class="book-tags">
+          <span class="book-tag">Education</span>
+          <span class="book-tag">Inclusive</span>
+          <span class="book-tag">5 Languages</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">Every child is born with unique gifts. This guide empowers parents, teachers, and caregivers to understand and support children with special needs — from IEP planning to classroom strategies.</div>
+        <div class="price-row">
+          <div class="price">₹250</div>
+          <a class="view-btn" href="special-education/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 2: NATURE'S PHARMACY -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">🌿</span>
+        <div class="book-title">Nature's Pharmacy</div>
+        <div class="book-tags">
+          <span class="book-tag">Health</span>
+          <span class="book-tag">Herbal</span>
+          <span class="book-tag">5 Languages</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">Rediscover 200+ medicinal plants from Siddha, Ayurveda, and tribal medicine. Learn home remedies, seasonal detox methods, and how to build a healing garden.</div>
+        <div class="price-row">
+          <div class="price">₹175</div>
+          <a class="view-btn" href="natures-pharmacy/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 3: BASIC LAW 1 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">⚖️</span>
+        <div class="book-title">Basic Law Text Book — Book 1</div>
+        <div class="book-tags">
+          <span class="book-tag">Law</span>
+          <span class="book-tag">Rights</span>
+          <span class="book-tag">5 Languages</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">Know your rights! This book breaks down complex Indian constitutional law into simple concepts — for students, farmers, workers, and every citizen.</div>
+        <div class="price-row">
+          <div class="price">₹99</div>
+          <a class="view-btn" href="basic-law-book1/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 4: BASIC LAW 2 -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">📜</span>
+        <div class="book-title">Basic Law Text Book — Book 2</div>
+        <div class="book-tags">
+          <span class="book-tag">Law</span>
+          <span class="book-tag">Bilingual</span>
+          <span class="book-tag">Tamil & English</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">A unique bilingual law edition — Tamil paired with English side by side. Ideal for law entrance exams, civil service aspirants, and first-generation college students.</div>
+        <div class="price-row">
+          <div class="price">₹99</div>
+          <a class="view-btn" href="basic-law-book2/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 5: SANATHANAM -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">📗</span>
+        <div class="book-title">Sanathanam vs Dravidian Model 2.0</div>
+        <div class="book-tags">
+          <span class="book-tag">Culture</span>
+          <span class="book-tag">History</span>
+          <span class="book-tag">6 Languages</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">An analytical work examining Sanathanam's hierarchical social order against the Dravidian model's egalitarian vision — with history, sociology, and political philosophy.</div>
+        <div class="price-row">
+          <div class="price">₹200</div>
+          <a class="view-btn" href="sanathanam/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 6: PERIYAR -->
+    <div class="book-card">
+      <div class="book-header">
+        <span class="book-icon">📜</span>
+        <div class="book-title">Thanthai Periyar Research</div>
+        <div class="book-tags">
+          <span class="book-tag">Research</span>
+          <span class="book-tag">History</span>
+          <span class="book-tag">6 Languages</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">A monumental research work on the life, philosophy, and revolutionary legacy of Thanthai Periyar — available in all 6 languages for the widest reach.</div>
+        <div class="price-row">
+          <div class="price">₹250</div>
+          <a class="view-btn" href="periyar-research/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOK 7: MINDTRAPS -->
+    <div class="book-card dark">
+      <div class="book-header">
+        <span class="book-icon">🧠</span>
+        <div class="book-title" style="font-size:1.3rem;"><span style="color:#fff;">Mind</span><span style="color:#d4a843;">Traps</span></div>
+        <div class="book-tags">
+          <span class="book-tag">Psychology</span>
+          <span class="book-tag">Bilingual</span>
+          <span class="book-tag">English & Tamil</span>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-preview-text">The hidden psychology that controls everything you do. 10 chapters on cognitive biases, emotional contagion, dark personalities, herd mentality, and how to break free.</div>
+        <div class="price-row">
+          <div class="price">₹199</div>
+          <a class="view-btn gold-btn" href="mind-traps/index.html">🛒 Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section id="bundle">
+  <h2 class="section-title">🎁 Bundle Offer</h2>
+  <div class="divider"></div>
+  <div class="bundle-card">
+    <h3>Complete Book Bundle</h3>
+    <p style="color:#d4a04a;">All Books · Tamil, Telugu, Malayalam, Kannada, Hindi &amp; English</p>
+    <div class="bundle-price">₹1000</div>
+    <div class="bundle-sub">Save ₹200+ · All 6 language editions included</div>
+    <a class="bundle-buy" href="https://rzp.io/rzp/ogRdyIrA" target="_blank">🛒 Buy Bundle Now</a>
+    <p style="margin-top:20px;color:#9a8060;font-size:0.82rem;">Secure payment via Razorpay · Instant digital delivery</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Velugeetha Digital Books</span> · வேலுகீதா டிஜிட்டல் புத்தகங்கள்</p>
+  <p style="margin-top:6px;">Accessible Knowledge for Every Student · <span>♿ Inclusive Edition</span></p>
+</footer>
+
+<script>
+let fontSize = 16;
+function changeFontSize(dir){
+  fontSize = Math.min(22, Math.max(12, fontSize + dir*2));
+  document.body.style.fontSize = fontSize+'px';
+}
+let highContrast = false;
+function toggleContrast(){
+  highContrast = !highContrast;
+  if(highContrast){
+    document.documentElement.style.setProperty('--bg','#000');
+    document.documentElement.style.setProperty('--card-bg','#111');
+    document.documentElement.style.setProperty('--dark','#fff');
+    document.documentElement.style.setProperty('--border','#666');
+    document.body.style.background='#000';
+  } else {
+    document.documentElement.style.setProperty('--bg','#fef9f0');
+    document.documentElement.style.setProperty('--card-bg','#fffdf5');
+    document.documentElement.style.setProperty('--dark','#1a1008');
+    document.documentElement.style.setProperty('--border','#e8d5a0');
+    document.body.style.background='#fef9f0';
+  }
+}
+</script>
+</body>
+</html>
